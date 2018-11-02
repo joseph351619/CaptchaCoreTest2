@@ -5,6 +5,38 @@
     </div>
     <div class='col-sm-9 body-content'>
       <router-outlet></router-outlet>
+      <h1>{{title}}</h1>
+
+      <div>{{message}}</div>
+      <br />
+
+      <form *ngIf="!isLogin">
+        <div>
+          <label>Username</label>
+          <input type="text" name="username" [(ngModel)]="username" />
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" name="password" [(ngModel)]="password" />
+        </div>
+        <div>
+          <label>Captcha</label>
+          <input type="text" name="code" [(ngModel)]="code" />
+          <img name="codeImage1" class="captcha" readonly="readonly"
+               [ngStyle]="{'background-image': 'url(' + captchaUrl1 + ')'}" style=" width:80px; height:30px;"/>
+          <img name="codeImage2" class="captcha" readonly="readonly"
+               [ngStyle]="{'background-image': 'url(' + captchaUrl2 + ')'}" style=" width:80px; height:30px;"/>
+        </div>
+        <div class="center">
+          <input type="button" value="Login" (click)="login()" />
+          <input type="button" value="Clear" (click)="clear()" />
+        </div>
+      </form>
+
+      <div *ngIf="isLogin">
+        Hello~ {{username}}
+        <input type="button" value="Logout" (click)="logout()" />
+      </div>
     </div>
   </div>
 </div>
